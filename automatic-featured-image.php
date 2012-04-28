@@ -8,11 +8,13 @@
  */
 function dko_autoset_featured() {
   global $post;
-  if (!has_post_thumbnail($post->ID)) {
-    $attached_image = get_children("post_parent=$post->ID&post_type=attachment&post_mime_type=image&numberposts=1");
-    if ($attached_image) {
-      foreach ($attached_image as $attachment_id => $attachment) {
-        set_post_thumbnail($post->ID, $attachment_id);
+  if ($post) {
+    if (!has_post_thumbnail($post->ID)) {
+      $attached_image = get_children("post_parent=$post->ID&post_type=attachment&post_mime_type=image&numberposts=1");
+      if ($attached_image) {
+        foreach ($attached_image as $attachment_id => $attachment) {
+          set_post_thumbnail($post->ID, $attachment_id);
+        }
       }
     }
   }
