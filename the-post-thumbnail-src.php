@@ -8,6 +8,7 @@
  * @param string|array  $size
  * @return bool|string false on fail, URL to post thumbnail on success
  */
+if (!function_exists('dko_the_post_thumbnail_src')):
 function dko_the_post_thumbnail_src() {
   if (func_num_args() > 0) {
     $post_id = func_get_arg(0);
@@ -37,3 +38,4 @@ function dko_the_post_thumbnail_src() {
 
   return $image_src;
 }
+endif;
