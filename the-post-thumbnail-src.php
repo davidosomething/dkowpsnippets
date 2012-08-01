@@ -26,6 +26,7 @@ function dko_the_post_thumbnail_src() {
     return false;
   }
 
+  $size = 'thumbnail';
   if (func_num_args() > 1) {
     $size = func_get_arg(1);
   }
