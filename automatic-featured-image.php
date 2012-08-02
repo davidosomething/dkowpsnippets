@@ -9,7 +9,7 @@
 function dko_autoset_featured() {
   global $post;
 
-  if (!property_exists($post, 'ID')) {
+  if (!is_object($post) || !property_exists($post, 'ID')) {
     return;
   }
 
