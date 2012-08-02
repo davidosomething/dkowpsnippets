@@ -8,6 +8,11 @@
  */
 function dko_autoset_featured() {
   global $post;
+
+  if (!property_exists($post, 'ID')) {
+    return;
+  }
+
   if (!has_post_thumbnail($post->ID)) {
     $attached_image = get_children("post_parent=$post->ID&post_type=attachment&post_mime_type=image&numberposts=1");
     if ($attached_image) {
