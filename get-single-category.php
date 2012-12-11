@@ -1,4 +1,5 @@
 <?php
+if (!function_exists('dko_get_single_category')):
 /**
  * dko_get_single_category
  *
@@ -12,5 +13,4 @@ function dko_get_single_category() {
   }
   return $category[0]->cat_name;
 }
-
-
+endif;
