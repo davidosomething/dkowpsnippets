@@ -4,6 +4,7 @@
 
 function dko_is_child_of($pid) {
   global $post;         // load details about this page
+  static $top_levels = null;
 
   if (!is_object($post)) {
     return false;
@@ -14,15 +15,27 @@ function dko_is_child_of($pid) {
   }
 
   if (is_page($pid)) {
-    return true; // we're at the page or at a sub page
+    return true;
+  }
+
+  if (!$top_levels) {
+    $top_levels = array();
+    $top_levels_query = get_pages(array(
+      'parent'        => 0,
+      'hierarchical'  => 0
+    ));
+    foreach ($top_levels_query as $page) {
+      $top_levels[$page->post_name] = $page->ID;
+    }
   }
 
   // now we actually check the ancestors
   $ancestors = get_post_ancestors($post->ID);
-  foreach($ancestors as $ancestor) {
-    if ($ancestor == $pid) {
-      return true;
-    }
+  $intersection = array_intersect($top_levels, $ancestors);
+  if (count($intersection)) {
+    $intersection_keys = array_keys($intersection);
+    $found_ancestor = $intersection_keys[0];
+    return ($found_ancestor == $pid);
   }
 
   return false;  // we're elsewhere
