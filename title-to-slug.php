@@ -1,15 +1,15 @@
 <?php
 /**
  * dko_title_to_slug
- *
  * Given some string, return slug-formatted version
+ * http://stackoverflow.com/a/14550926/230473
  *
- * @param string $title
- * @access public
+ * @param string $string
  * @return string slug formatted title
  */
-function dko_title_to_slug($title) {
-  $page_slug = str_replace(" ", "-", strtolower($title));
-  $page_slug = ereg_replace("[^A-Za-z0-9-]", "", $page_slug);
-  return $page_slug;
+function dko_title_to_slug($string) {
+  $string = strtolower($string);
+  $string = preg_replace("/\W+/", "-", $string); // \W = any "non-word" character
+  $string = trim($string, "-");
+  return $string;
 }
