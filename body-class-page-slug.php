@@ -8,7 +8,8 @@ function dko_body_class_page_slug($classes) {
     if ($post->post_parent) {
       $parent = get_post($post->post_parent);
       $classes[] = 'parent-slug-' . $parent->post_name;
-      $eldest_id = end(get_post_ancestors($post->ID));
+      $ancestors = get_post_ancestors($post->ID);
+      $eldest_id = end($ancestors);
     }
     else {
       $eldest_id = $post->ID;
