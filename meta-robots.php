@@ -14,14 +14,6 @@
  */
 
 function dko_meta_robots() {
-  echo <<<EOS
-  <meta name="ROBOTS"     content="none,noarchive,nosnippet,noodp,noydir">
-EOS;
-  /* for specific bots
-  <meta name="GOOGLEBOT"  content="none,noarchive">
-  <meta name="MSNBOT"     content="none,noarchive">
-  <meta name="SLURP"     content="none,noarchive">
-  <meta name="TEOMA"     content="none,noarchive">
-   */
+  echo '<meta name="ROBOTS" content="none,noindex,noarchive,nosnippet,noodp,noydir,follow"><!-- dko -->';
 }
 add_action('wp_head', 'dko_meta_robots', 99);
